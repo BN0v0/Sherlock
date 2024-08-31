@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Kiwoko",
+            "program": "${workspaceFolder}/kiwoko/src/main.js",
+            "args": ["startUrls=https://www.kiwoko.pt/gatos/comida-para-gatos/racao-para-gatos/racao-para-gato-esterilizado/nath-adult-sterilised-frango-e-arroz-racao-para-gatos/NTH88594_M.html"],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "APIFY_LOCAL_STORAGE_DIR": "apify_storage"
+            },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}

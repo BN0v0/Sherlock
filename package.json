@@ -1,0 +1,27 @@
+{
+	"name": "sherlock",
+	"version": "0.0.1",
+	"type": "module",
+	"description": "This is a self made framework based in Apify Actors",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"dependencies": {
+		"@supabase/supabase-js": "^2.45.3",
+		"apify": "^3.1.10",
+		"crawlee": "^3.5.4",
+		"dotenv": "^16.4.5"
+	},
+	"devDependencies": {
+		"@apify/eslint-config": "^0.4.0",
+		"eslint": "^8.50.0"
+	},
+	"scripts": {
+		"start": "node src/main.js",
+		"lint": "eslint ./src --ext .js,.jsx",
+		"lint:fix": "eslint ./src --ext .js,.jsx --fix",
+		"test": "echo \"Error: oops, the actor has no tests yet, sad!\" && exit 1"
+	},
+	"author": "Bruno Novo",
+	"license": "ISC"
+}

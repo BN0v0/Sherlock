@@ -1,0 +1,36 @@
+{
+    "title": "Kiwoko Spider Inputs",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "startUrls": {
+            "title": "Start URLs",
+            "type": "array",
+            "description": "URLs to start crawling from.",
+            "editor": "requestListSources",
+            "prefill": [
+                { "url": "https://www.kiwoko.pt/sitemap-products_0.xml" }
+            ]
+        },
+        "concurrency": {
+            "title": "Max Concurrency",
+            "type": "integer",
+            "description": "Maximum number of concurrent requests the crawler will make.",
+            "minimum": 1,
+            "default": 1
+        },
+        "useDatabase": {
+            "title": "Use Database",
+            "type": "boolean",
+            "description": "Whether to use the database as an additional source of URLs to crawl.",
+            "default": false
+        },
+        "scope": {
+            "title": "URL Scope",
+            "type": "string",
+            "description": "Regular expression defining the scope of URLs to crawl. Only URLs matching this pattern will be processed.",
+            "default": "https://www.kiwoko.pt/.*"
+        }
+    },
+    "required": ["startUrls"]
+}
