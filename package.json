@@ -17,7 +17,7 @@
 		"eslint": "^8.50.0"
 	},
 	"scripts": {
-		"start": "node src/main.js",
+		"start": "node app/src/main.js",
 		"lint": "eslint ./src --ext .js,.jsx",
 		"lint:fix": "eslint ./src --ext .js,.jsx --fix",
 		"test": "echo \"Error: oops, the actor has no tests yet, sad!\" && exit 1"
