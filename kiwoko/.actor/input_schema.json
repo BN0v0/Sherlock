@@ -29,6 +29,7 @@
             "title": "URL Scope",
             "type": "string",
             "description": "Regular expression defining the scope of URLs to crawl. Only URLs matching this pattern will be processed.",
+            "editor": "scope",
             "default": "https://www.kiwoko.pt/.*"
         }
     },
