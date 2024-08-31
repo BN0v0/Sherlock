@@ -3,14 +3,17 @@
     "type": "object",
     "schemaVersion": 1,
     "properties": {
+        "spiderName": {
+            "title": "Spider Name",
+            "type": "string",
+            "description": "Spider Name for spider to run",
+            "editor": "textfield"
+        },
         "startUrls": {
             "title": "Start URLs",
             "type": "array",
             "description": "URLs to start crawling from.",
             "editor": "requestListSources",
-            "prefill": [
-                { "url": "https://www.kiwoko.pt/sitemap-products_0.xml" }
-            ]
         },
         "concurrency": {
             "title": "Max Concurrency",
@@ -29,9 +32,8 @@
             "title": "URL Scope",
             "type": "string",
             "description": "Regular expression defining the scope of URLs to crawl. Only URLs matching this pattern will be processed.",
-            "editor": "textfield",
-            "default": "https://www.kiwoko.pt/.*"
+            "editor": "textfield"
         }
     },
-    "required": []
+    "required": ["scope"]
 }
