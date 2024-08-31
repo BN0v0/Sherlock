@@ -4,6 +4,9 @@ import { CheerioCrawler } from 'crawlee';
 import SupabaseClient from '../utils/supabase.js';
 import { isValidUrl, isInScope } from '../utils/request.js';
 
+const __dirname = path.dirname(__filename);
+
+
 async function main() {
     await Actor.init();
 
