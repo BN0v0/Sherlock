@@ -131,9 +131,12 @@ const productJsonHandler = async (ctx) => {
 
 // Classification Handler
 export const router = async ctx => {
-    const { $, request } = ctx;
-
-    if ($ && $('url loc').length > 0) {
+    const { json, $, request } = ctx;
+    
+    if(json){
+        await productJsonHandler(ctx);
+    }
+    else if ($ && $('url loc').length > 0) {
         await sitemapHandler(ctx);
     } else if ($ && $('div.home-promo').length > 0){
        await homePageHandler(ctx);
@@ -141,8 +144,6 @@ export const router = async ctx => {
        await batchPageHandler(ctx);
     } else if ($ && $('div[data-action="Product-Show"]').length > 0){
         await productPageHandler(ctx);
-    } else if (ctx?.contentType?.type.includes('application/json')){ 
-        await productJsonHandler(ctx);
     } else {
         log.warning(`Unable to classify this resource. (request = ${request.url})`);
     }

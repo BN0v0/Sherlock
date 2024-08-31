@@ -3,9 +3,10 @@ import path from 'path';
 import { CheerioCrawler } from 'crawlee';
 import SupabaseClient from '../utils/supabase.js';
 import { isValidUrl, isInScope } from '../utils/request.js';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 async function main() {
     await Actor.init();
@@ -20,19 +21,16 @@ async function main() {
     } = input ?? {};
 
     if (!spiderName) {
-        console.error('Spider name must be provided using --spiderName.');
-        process.exit(1);
+        throw new Error('Spider name must be provided using --spiderName.');
     }
-
-    const spiderPath = path.join(__dirname, spiderName, 'src', 'routes', 'index.js');
-    const { router } = await import(spiderPath);
-
 
     if (!scope) {
-        console.error('Spider name must be provided using --spiderName.');
-        process.exit(1);
+        throw new Error('Scope must be provided.');
     }
 
+    const spiderPath = path.join(__dirname, spiderName, 'src', 'routes', 'spider.js');
+    const {router} = await import(spiderPath);
+    
     const scopeRegex = new RegExp(scope);
 
     const proxyConfiguration = await Actor.createProxyConfiguration();
@@ -78,6 +76,7 @@ async function addUrlsFromDatabase(startUrls, scopeRegex) {
         await main();
     } catch (error) {
         console.error('Actor failed:', error);
+        process.exit(1);
     } finally {
         await Actor.exit();
     }
