@@ -1,4 +1,5 @@
 import { Actor } from 'apify';
+import path from 'path';
 import { CheerioCrawler } from 'crawlee';
 import SupabaseClient from '../utils/supabase.js';
 import { isValidUrl, isInScope } from '../utils/request.js';
