@@ -1,8 +1,8 @@
 import { Actor } from 'apify';
 import { CheerioCrawler } from 'crawlee';
 import router from './routes/index.js';
-import SupabaseClient from '../../utils/supabase.js';
-import { isValidUrl, isInScope } from '../../utils/request.js';
+import SupabaseClient from '../../../utils/supabase.js';
+import { isValidUrl, isInScope } from '../../../utils/request.js';
 
 async function main() {
     await Actor.init();

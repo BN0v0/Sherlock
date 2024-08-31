@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Kiwoko",
-            "program": "${workspaceFolder}/kiwoko/src/main.js",
+            "program": "${workspaceFolder}/app/src/main.js",
             "args": ["startUrls=https://www.kiwoko.pt/gatos/comida-para-gatos/racao-para-gatos/racao-para-gato-esterilizado/nath-adult-sterilised-frango-e-arroz-racao-para-gatos/NTH88594_M.html"],
             "cwd": "${workspaceFolder}",
             "env": {
