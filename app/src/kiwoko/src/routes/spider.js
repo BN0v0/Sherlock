@@ -1,5 +1,5 @@
 import { Dataset, log } from 'crawlee';
-import { extractIngredients, extractAnalyticalComponents, extractKeyFeatures } from '../libs/index.js'
+import { extractIngredients, extractAnalyticalComponents, extractKeyFeatures, safeGet, extractPricing, createDetailedTime } from '../libs/index.js'
 
 const sitemapHandler = async ctx => {
     const { $, request } = ctx;
@@ -90,35 +90,31 @@ const productJsonHandler = async (ctx) => {
       }
   
       const product = json.product;
-  
-      // Helper function to safely access nested properties
-      const safeGet = (obj, path, defaultValue = null) => {
-        return path.split('.').reduce((acc, part) => acc && acc[part], obj) ?? defaultValue;
-      };
-  
-      const extractedData = {
+
+      const pricing = extractPricing(product);
+    const time = createDetailedTime();
+
+    const extractedData = {
         id: safeGet(product, 'id'),
         ean: safeGet(product, 'ean'),
         name: safeGet(product, 'productNameWithoutName'),
         brand: safeGet(product, 'brand'),
         url: safeGet(product, 'productPageURL'),
         requestUrl: request.url,
-        regularPrice: safeGet(product, 'price.sales.value'),
-        currency: safeGet(product, 'price.sales.currency'),
-        unitPrice: safeGet(product, 'variationAttributes.0.values.0.pricePerUnit.value'),
-        unitPriceCurrency: safeGet(product, 'variationAttributes.0.values.0.pricePerUnit.currencyCode'),
+        pricing,
         contents: safeGet(product, 'variationAttributes.0.displayValue'),
         categories: safeGet(product, 'itemCategory', '').split('-').filter(Boolean),
         promotions: Array.isArray(product.promotions) 
-          ? product.promotions.map(promo => ({
-              callout: safeGet(promo, 'calloutMsg'),
-              details: safeGet(promo, 'details')
+        ? product.promotions.map(promo => ({
+            callout: safeGet(promo, 'calloutMsg'),
+            details: safeGet(promo, 'details')
             }))
-          : [],
+        : [],
         ingredients: extractIngredients(safeGet(product, 'longDescription', '')),
         analyticalComponents: extractAnalyticalComponents(safeGet(product, 'longDescription', '')),
-        keyFeatures: extractKeyFeatures(safeGet(product, 'longDescription', ''))
-      };
+        keyFeatures: extractKeyFeatures(safeGet(product, 'longDescription', '')),
+        time,
+    };
   
       // Push the extracted data to the dataset
       await Dataset.pushData(extractedData);
